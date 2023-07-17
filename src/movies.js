@@ -65,7 +65,6 @@ function orderByYear(moviesArray) {
         return a.year - b.year || a.title.localeCompare(b.title) 
     })
     
-
     return arrNumericSorted
 }
 
@@ -79,7 +78,21 @@ function orderAlphabetically(moviesArray) {
 }
 
 // BONUS - Iteration 7: Time Format - Turn duration of the movies from hours to minutes
-function turnHoursToMinutes(moviesArray) {}
+function turnHoursToMinutes(moviesArray) {
+    const arr = moviesArray.map(element => {
+        let cleanNumber = element.duration.replace("h", "").replace("min", "");
+
+        let arrNumber = cleanNumber.split(" ");
+
+        if (arrNumber[0] === undefined) {arrNumber[0] = 0}
+        else if (arrNumber[1] === undefined) {arrNumber[1] = 0}
+        
+        element.duration = parseInt(arrNumber[0])*60 + parseInt(arrNumber[1])
+        return element
+    })
+    return arr
+    
+}
 
 // BONUS - Iteration 8: Best yearly score average - Best yearly score average
 function bestYearAvg(moviesArray) {}
