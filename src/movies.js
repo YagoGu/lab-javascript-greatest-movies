@@ -99,7 +99,50 @@ function turnHoursToMinutes(moviesArray) {
 
 // BONUS - Iteration 8: Best yearly score average - Best yearly score average
 function bestYearAvg(moviesArray) {
-    // return moviesArray.map(element => {
-    //     element.score
-    // })
+    const arrYear = moviesArray.map(element => {
+        return element.year
+    })
+    const arrScore= moviesArray.map(element => {
+        return element.score
+    })
+    let everything = []
+    let repeatedYears = []
+    let globalScores = []
+    for (let i = 0; i < arrYear.length; i++) {
+        let takeDate = arrYear[i];
+        let sum = 0;
+        let count = 0;
+        let avg = 0;
+        if (!repeatedYears.includes(takeDate)){
+            for (let j = 0; j < arrScore.length; j++) {
+                if (arrYear[i] === arrYear[j]) {
+                    sum+=arrScore[j]
+                    count+=1
+                }
+            }
+            avg = sum/count
+            everything.push({year: takeDate, average: avg})
+            repeatedYears.push(takeDate)
+            globalScores.push(avg)
+        }
+    }
+    arrNumericYear = everything.sort((a, b) => {
+        return a.year - b.year 
+    })
+    let bigNumber = 0 ;
+    let oldYear = 0;
+    console.log(arrNumericYear)
+    for (let i = 0; i < arrNumericYear.length; i++) {
+        if (bigNumber < arrNumericYear[i].average) {
+            bigNumber = arrNumericYear[i].average;
+            oldYear = arrNumericYear[i].year;
+        }
+    }
+    console.log(oldYear, bigNumber)
+    if (bigNumber == 0) {
+        return null
+    }
+    else {
+        return "The best year was "+ oldYear + " with an average score of "+ bigNumber
+    }
 }
